@@ -2,19 +2,17 @@
 #define __CORE_AUX_H__
 
 
-#ifdef __cplusplus
 extern "C" {
-#endif
 
 #include <stdint.h>
 
 typedef enum {
-  REG_X = 1,
-  REG_Y,
-  REG_Z,
-  REG_T,
-  REG_LX,
-  REG_A
+  DMREG_X = 1,
+  DMREG_Y,
+  DMREG_Z,
+  DMREG_T,
+  DMREG_LX,
+  DMREG_A
 } reg_id_t;
 
 
@@ -49,6 +47,9 @@ int is_dmy();
 
 // Is program mode
 int is_pgm_mode();
+
+// Is Big Stack mode
+int is_big_stack();
 
 // Set clk24 flag
 void set_clk24(int val);
@@ -92,7 +93,7 @@ int get_calc_flag(int flag_nr);
 void set_calc_flag(int flag_nr, int val);
 
 // Core keydown hack to support separate menu key line
-int core_keydown_ex(int key, int *enqueued, int *repeat, int no_menu_key);
+int core_keydown_ex(int key, bool *enqueued, int *repeat, int no_menu_key);
 
 // Returns printer delay set by DELAY command
 unsigned int core_printer_delay();
@@ -100,9 +101,7 @@ void core_set_printer_delay(unsigned int val);
 
 void core_redisplay();
 
-#ifdef __cplusplus
 } // extern "C"
-#endif
 
 char* core_display_buffer();
 
